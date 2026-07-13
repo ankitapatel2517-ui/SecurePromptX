@@ -1,0 +1,5 @@
+Attack Type,Total Tested,Evaded Detection,Evasion Rate (%)
+leetspeak,40,0,0.0
+zero_width_space,40,0,0.0
+alternating_caps,40,0,0.0
+spaced_triggers,40,0,0.0
