@@ -1,9 +1,9 @@
 
-from google import genai
+from groq import Groq
 from explanation_prompt import PROMPT_TEMPLATE
 import os
 
-client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
+client = Groq(api_key=os.environ["GROQ_API_KEY"])
 
 def explain(original_text, classifier_output):
     prompt = PROMPT_TEMPLATE.format(
@@ -11,8 +11,9 @@ def explain(original_text, classifier_output):
         label=classifier_output["label"],
         confidence=classifier_output["confidence"]
     )
-    response = client.models.generate_content(
-        model="gemini-flash-latest",
-        contents=prompt
+    response = client.chat.completions.create(
+        model="llama-3.3-70b-versatile",
+        messages=[{"role": "user", "content": prompt}],
+        max_tokens=200
     )
-    return response.text
+    return response.choices[0].message.content

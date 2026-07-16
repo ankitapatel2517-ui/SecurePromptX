@@ -4,10 +4,14 @@ PROMPT_TEMPLATE = """You are a security analyst explaining why a text input was 
 Input text: "{original_text}"
 Classifier verdict: {label} (confidence: {confidence})
 
-Do not question or override the verdict — your job is only to explain it.
+Do not question or override the verdict — your only job is to explain it.
 
-In 2-3 sentences, explain in plain language:
-1. What specific phrase(s) from the input text likely triggered this verdict — quote them directly.
-2. Why that phrase is associated with prompt injection / jailbreak risk (if suspicious), or why the text appears benign despite surface similarity to attacks (if safe).
+Respond in EXACTLY this structure, nothing else:
+Key phrase: <the specific word or phrase from the input that most likely drove this verdict, quoted exactly>
+Reason: <1-2 sentences explaining why that phrase indicates {label}, specific to this input>
 
-Do not repeat the confidence score in your explanation. Be concrete and specific to this input — do not write a generic explanation that could apply to any flagged text."""
+Rules:
+- The "Key phrase" must be copied exactly from the input text, not paraphrased.
+- If verdict is "safe", Key phrase can be "none" and Reason should explain why the text is benign despite any surface similarity to attack patterns.
+- Do not mention the confidence score.
+- Do not write a generic explanation that could apply to unrelated flagged texts."""
