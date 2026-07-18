@@ -1,0 +1,5 @@
+{
+  "status": "REJECTED - not used as final model",
+  "reason": "v3 fixed 6/7 false positives on noisy OOD input but caused 4/5 non-English attacks to be misclassified as safe (vs 5/5 correctly caught by v1)",
+  "conclusion": "v1 remains the reported/deployed model"
+}
